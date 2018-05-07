@@ -7,17 +7,17 @@ require(msm)
 require("PerformanceAnalytics")
 
 # simulate from the data generating process
-T <- 100
+T <- 50
 # number of explanatory variables in latent variable equation (common for every i); those are variables corresponding only to beta (alpha is not included in r)
 r <- 3 
 ## select the number of individuals in the panel
 # the accuracy of estimation grows with n; for low n, the accuracy is usually very poor in terms of estimating alpha parameter
-n <- 200 
+n <- 400 
 # select beta parameter that is common across individuals
 beta <- rnorm(r, 0, 1)
 ## select alphas which is associated with i-th individual 
 # to that end we need some value of alpha, which drives the distribution of alpha_i's (all alpha_i's are centered around alpha)
-alpha <- rnorm(1, 0, 0.5)
+alpha <- rnorm(1, 0, 1)
 # in the general model sigma_alpha_2 is also a model parameter, here we just assume that it is equal to 1
 sigma2_alpha <- 1
 alpha_i <- rnorm(n, alpha, sigma2_alpha) # for the time being sigma2_alpha is fixed at 1
@@ -67,6 +67,8 @@ for(i in 1:n){  # for each individual
 ## after getting some initial vector of z's, we can run the mcmc sampler
 for (s in 2:nSim){
     
+  print(s)
+  
    ## alpha_i's step according to the formula 14.11 and 14.12
    for(i in 1:n){
       

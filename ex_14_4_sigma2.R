@@ -15,7 +15,7 @@ T <- 100
 r <- 3 
 ## select the number of individuals in the panel
 # the accuracy of estimation grows with n; for low n, the accuracy is usually very poor in terms of estimating alpha parameter
-n <- 1000 
+n <- 100 
 # select beta parameter that is common across individuals
 beta <- rnorm(r, 0, 1)
 ## select alphas which is associated with i-th individual 
@@ -31,7 +31,7 @@ alpha_is <- matrix(t(matrix(alpha_i, length(alpha_i), T)))
 sigma2 <- rinvgamma(1, 150, 100)
 eps <- as.matrix(rnorm(n * T, 0, sqrt(sigma2)))
 # matrix of regressors (again, we stack them indivdidual by individual)
-X <- matrix(rnorm(n * T * r, 0, 0.1), n * T, r) # we simulate n x T x r values and then we structure them into nT x r matrix
+X <- matrix(rnorm(n * T * r, 0, 1), n * T, r) # we simulate n x T x r values and then we structure them into nT x r matrix
 # having all the components, we can simulate from this data generating process according to 14.10
 z <- alpha_is + X %*% beta + eps
 # derive y from z

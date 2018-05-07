@@ -1,9 +1,5 @@
 ## posterior simulation in the ordered probit model
-# this is a simplified version compared to the one presented in ex 14.5
-# the simplification is related to no-cutpoints step in the sampler.
-# the sampler is limited to beta and z (latent variable) step, 
-# what makes it very similar to the one presented in ex 14.1, 
-# with the distiction that now more classes of dependent variable are concerned
+# full version of sampler
 
 rm(list = ls())
 
@@ -91,7 +87,7 @@ for (i in 2:nSim){
   for (j in 1:T){
     
     # we sample z from the interval, which y[j] is associated to; each y is associated to another interval of sampling for z 
-    z[j] <- rtnorm(1, mean = x[j,] %*% betaSim[,1], sd = 1, lower = cutpoints[y[j], i-1], upper = cutpoints[y[j] + 1, i-1])
+    z[j] <- rtnorm(1, mean = x[j,] %*% betaSim[,i], sd = 1, lower = cutpoints[y[j], i-1], upper = cutpoints[y[j] + 1, i-1])
   }
   
   # cutpoints step
