@@ -18,7 +18,7 @@ x <- matrix(rnorm(T * r, 0, 1), T, r)
 z <- x %*% t(t(beta)) + eps
 ## derive y from z
 # first we need to select the number of cutpoints
-M <- 4
+M <- 5
 a <- rep(0, M + 1) 
 a0 <- -Inf
 a1 <- 0
@@ -26,6 +26,8 @@ aM <- Inf
 # among M cutpoints, two are always identified a prior, a1 = 0 and aM = Inf
 # thus for specified M we always select only M-2 from uniform
 trueCutpoints <- runif(M-2, 0.1, 2) # value of 2 is set ad hoc, can by anything reasonably bigger than 0
+# reorder in an increasing way
+trueCutpoints <- trueCutpoints[order(trueCutpoints)]
 
 a[1] <- -Inf 
 a[2] <- 0
