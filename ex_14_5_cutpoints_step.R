@@ -18,7 +18,7 @@ x <- matrix(rnorm(T * r, 0, 1), T, r)
 z <- x %*% t(t(beta)) + eps
 ## derive y from z
 # first we need to select the number of cutpoints
-M <- 5
+M <- 10
 a <- rep(0, M + 1) 
 a0 <- -Inf
 a1 <- 0
