@@ -18,7 +18,7 @@ x <- matrix(rnorm(T * r, 0, 1), T, r)
 z <- x %*% t(t(beta)) + eps
 ## derive y from z
 # first we need to select the number of cutpoints
-M <- 10
+M <- 4
 a <- rep(0, M + 1) 
 a0 <- -Inf
 a1 <- 0
@@ -100,7 +100,7 @@ for (i in 2:nSim){
  #   alpha_m <- max(cutpoints[m - 1, i], max(z[y == m - 1]))
  #   beta_m <- min(cutpoints[m + 1, i], min(z[y == m]))
     
-    alpha_m <- max(cutpoints[m - 1, i], max(z[y == m - 1]))
+    alpha_m <- max(cutpoints[m - 1, i-1], max(z[y == m - 1]))
     beta_m <- min(cutpoints[m + 1, i-1], min(z[y == m])) # cutpoints[m + 1, i ] has not been available yet at computing beta_m, so we take the one from i-1 th draw
     cutpoints[m, i] <- runif(1, alpha_m, beta_m)
   }
